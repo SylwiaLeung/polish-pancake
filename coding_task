@@ -1,0 +1,33 @@
+import unittest
+from collections import Counter
+
+
+def is_prime(value):
+    if value <= 1:
+        return False
+    for number in range(2, value):
+        if value % number == 0:
+            return False
+    return True
+
+
+def seq_difference(sequence_one, sequence_two):
+    seq_one = Counter(sequence_one)
+    seq_two = Counter(sequence_two)
+    for key in seq_one:
+        if key in seq_two:
+            if is_prime(seq_two[key]):
+                while key in sequence_one:
+                    sequence_one.remove(key)
+    return sequence_one
+
+
+class TestIsPrime(unittest.TestCase):
+    def test_prime(self):
+        self.assertTrue(is_prime(2))
+
+    def test_prime1(self):
+        self.assertTrue(is_prime(1))
+
+    def test_prime2(self):
+        self.assertTrue(is_prime(3))
