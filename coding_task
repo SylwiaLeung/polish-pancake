@@ -2,6 +2,7 @@ import unittest
 from collections import Counter
 
 
+#this function checks if the given number is prime
 def is_prime(value):
     if value <= 1:
         return False
@@ -11,6 +12,8 @@ def is_prime(value):
     return True
 
 
+#this function checks if the key from seq1 can be found in seq2; if so, the value will be checked for primality; 
+#if True, the values will be deleted from seq1.
 def seq_difference(sequence_one, sequence_two):
     seq_one = Counter(sequence_one)
     seq_two = Counter(sequence_two)
@@ -22,6 +25,7 @@ def seq_difference(sequence_one, sequence_two):
     return sequence_one
 
 
+#this is a testing class for primality
 class TestIsPrime(unittest.TestCase):
     def test_prime(self):
         self.assertTrue(is_prime(2))
