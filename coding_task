@@ -10,19 +10,16 @@ def is_prime(value):
         if value % number == 0:
             return False
     return True
-
-
-#this function checks if the key from seq1 can be found in seq2; if so, the value will be checked for primality; 
-#if True, the values will be deleted from seq1.
+    
+    
+#this function creates a dictionary with items found in both sequences, checks values from seq2 for primality
+#then creates a new list based on the sequence1, with elements from the dictionary only
 def seq_difference(sequence_one, sequence_two):
     seq_one = Counter(sequence_one)
     seq_two = Counter(sequence_two)
-    for key in seq_one:
-        if key in seq_two:
-            if is_prime(seq_two[key]):
-                while key in sequence_one:
-                    sequence_one.remove(key)
-    return sequence_one
+    shared_items = {key: seq_one[key] for key in seq_one if not is_prime(seq_two[key])}
+    seq_three = [element for element in sequence_one if element in shared_items]
+    return seq_three
 
 
 #this is a testing class for primality
