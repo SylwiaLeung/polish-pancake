@@ -3,6 +3,7 @@ from collections import Counter
 
 
 #this function checks if the given number is prime
+
 def is_prime(value):
     if value <= 1:
         return False
@@ -12,16 +13,25 @@ def is_prime(value):
     return True
     
     
-#this function creates a dictionary with items found in seq1, without those from seq2 that appeared prime number of times
+#this function creates a dictionary based on seq2, without those values that appeared prime number of times
 #then filters seq1 based on the shared_items dictionary
+
 def seq_difference(sequence_one, sequence_two):
-    seq_one = Counter(sequence_one)
     seq_two = Counter(sequence_two)
-    shared_items = {key: seq_one[key] for key in seq_one if not is_prime(seq_two[key])}
+    shared_items = {key: seq_two[key] for key in seq_two if not is_prime(seq_two[key])}
     return list(filter(lambda element: element in shared_items, sequence_one))
 
 
+#same function can be written in a shorter way, but less readable 
+#also, instead of working on a new object, it alters the original seq1; to avoid that we might want to work on a copy
+
+def seq_difference_short(sequence_one, sequence_two):
+    seq_two = Counter(sequence_two)
+    return list(filter(lambda element: element in sequence_one and not is_prime(seq_two[element]), sequence_one))
+
+
 #this is a testing class for primality
+
 class TestIsPrime(unittest.TestCase):
     def test_prime(self):
         self.assertTrue(is_prime(2))
