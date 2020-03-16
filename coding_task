@@ -12,14 +12,13 @@ def is_prime(value):
     return True
     
     
-#this function creates a dictionary with items found in both sequences, checks values from seq2 for primality
-#then creates a new list based on the sequence1, with elements from the dictionary only
+#this function creates a dictionary with items found in seq1, without those from seq2 that appeared prime number of times
+#then filters seq1 based on the shared_items dictionary
 def seq_difference(sequence_one, sequence_two):
     seq_one = Counter(sequence_one)
     seq_two = Counter(sequence_two)
     shared_items = {key: seq_one[key] for key in seq_one if not is_prime(seq_two[key])}
-    seq_three = [element for element in sequence_one if element in shared_items]
-    return seq_three
+    return list(filter(lambda element: element in shared_items, sequence_one))
 
 
 #this is a testing class for primality
