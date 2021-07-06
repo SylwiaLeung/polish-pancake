@@ -4,6 +4,7 @@ import time
 
 
 def turn_file_to_dict(file):
+    """this reads lines from file, turns them into a dictionary and returns the dict"""
     capital_dict = {}
     with open(file) as f:
         for line in f:
@@ -13,12 +14,14 @@ def turn_file_to_dict(file):
 
 
 def get_random_word(func):
+    """this takes a function as an argument to get the country-capital dictionary and return a random pair as list"""
     word_dict = func
     word_pair = choice(list(word_dict.items()))
     return list(word_pair)
 
 
 def display_hangman(num):
+    """this returns a stage of hangman corresponding to the num of lives left"""
     stages = ["""
                     ------------
                     |          |
@@ -90,6 +93,8 @@ def display_hangman(num):
 
 
 def add_record(winning_record):
+    """this takes winner's data as an argument to then compare it with existing records in the file 
+    and insert to file, if it fits criteria for 10 best scores, ordered from  the shortest to the longest solving time"""
     list_of_records = []
     with open("high_scores.txt", "r") as f:
         for line in f:
@@ -114,6 +119,7 @@ def add_record(winning_record):
 
 
 def win(num_tries, city, solving_time):
+    """this displays winning information along with doge ascii art, and adds the score to the best scores file if the criteria is met"""
     print("You win! Congratulations!")
     print(f"You guessed the capital after {num_tries} guesses. It took you {solving_time} seconds.")
     name = input("Please enter your name: ").strip().capitalize()
@@ -146,6 +152,7 @@ def win(num_tries, city, solving_time):
 
 
 def play(country_capital):
+    """this runs the game flow"""
     start_time = time.time()
     capital = country_capital[1].upper().replace(" ", "")
     country = country_capital[0]
@@ -200,6 +207,7 @@ def play(country_capital):
 
 
 def main():
+    """this asks the user if he wants to play and picks a random capital for the game"""
     word = get_random_word(turn_file_to_dict("countries_and_capitals.txt"))
     play(word)
     while input("Play again? (Y/N) ").upper() == "Y":
